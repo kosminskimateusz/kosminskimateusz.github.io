@@ -42,7 +42,8 @@ header > h1 {
 }
 
 #logo {
-  width: 25rem;
+  min-width: 15rem;
+  max-width: 25rem;
   border-radius: 0.6rem;
 }
 
