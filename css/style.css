@@ -4,18 +4,29 @@
    --backgroundColorDark: #1e1e1e;
    --textColor: rgb(233, 228, 219);
    --linkColor: rgb(207, 73, 10);
+<<<<<<< HEAD
    --linkHoverColor: rgba(82, 43, 26, 0.7);
+=======
+   --linkHoverColor: rgba(207, 73, 10, 0.7);
+>>>>>>> cd7328f7427a89c95d6194f54e74b5fbf3ea6bd1
    --main-font: "Poppins", sans-serif;
 }
 
 * {
    margin: 0;
    padding: 0;
+<<<<<<< HEAD
+=======
+   box-sizing: border-box;
+>>>>>>> cd7328f7427a89c95d6194f54e74b5fbf3ea6bd1
    background: var(--backgroundColorDark);
 }
 
 html {
+<<<<<<< HEAD
    box-sizing: border-box;
+=======
+>>>>>>> cd7328f7427a89c95d6194f54e74b5fbf3ea6bd1
    color: var(--textColor);
    font-family: var(--main-font);
 }
@@ -27,7 +38,11 @@ html {
 
 
 header {
+<<<<<<< HEAD
    width: 100vw;
+=======
+   width: 100v;
+>>>>>>> cd7328f7427a89c95d6194f54e74b5fbf3ea6bd1
    /* background: #111111; */
    overflow: hidden;
    text-align: center;
@@ -38,8 +53,12 @@ header {
 header>h1 {
    color: white;
    font-size: 3rem;
+<<<<<<< HEAD
    width: 27rem;
    max-width: 60vw;
+=======
+   width: 27%;
+>>>>>>> cd7328f7427a89c95d6194f54e74b5fbf3ea6bd1
    margin: 10px auto;
    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
    background: rgba(255, 166, 0, 0.781);
@@ -48,11 +67,15 @@ header>h1 {
 }
 
 #logo {
+<<<<<<< HEAD
    /* width: 30%; */
    /* width: 30vw; */
    margin: 1rem 2rem;
    width: 30rem;
    max-width: 65vw;
+=======
+   width: 30%;
+>>>>>>> cd7328f7427a89c95d6194f54e74b5fbf3ea6bd1
    border-radius: 1rem;
 }
 
