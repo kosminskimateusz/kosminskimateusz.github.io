@@ -16,12 +16,49 @@
 </head>
 
 <body>
-  <div class="page-container">
+  <div class="page">
+
     <main class="content">
-
+      
     </main>
+    <button id="side-bar-button-show" type="button" onclick="showHideSideBar('side-bar', 'side-bar-button-show')">
+      <p>
+        Show
+      </p>
+    </button>
+    <nav class="side-bar">
+      <button id="side-bar-button-hide" type="button" onclick="showHideSideBar('side-bar', 'side-bar-button-show')">
+        <p>
+          Hide
+        </p>
+      </button>
+      <h1>Kurs CSS</h1>
+      <a href="./index.html" class="side-bar-link-header">
+        Strona Główna
+      </a>
+      <a href="" class="side-bar-link-header">
+        Słowem wstępu
+      </a>
 
+      <ul class="side-bar-list">
+        <li class="side-bar-list-element">
+          <a href="#" class="side-bar-link">Wstęp</a>
+        </li>
+        <li class="side-bar-list-element">
+          <a href="#" class="side-bar-link">Podstawowe narzędzia</a>
+        </li>
+        <li class="side-bar-list-element">
+          <a href="#" class="side-bar-link">O CSS</a>
+        </li>
+        <li class="side-bar-list-element">
+          <a href="#" class="side-bar-link">Ważne informacje</a>
+        </li>
+      </ul>
+
+    </nav>
   </div>
+
+  <script src="./js//hideShowElements.js"></script>
 </body>
 
 </html>

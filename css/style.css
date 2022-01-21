@@ -4,18 +4,19 @@
    --backgroundColorDark: #1e1e1e;
    --textColor: rgb(233, 228, 219);
    --linkColor: rgb(207, 73, 10);
-   --linkHoverColor: rgba(82, 43, 26, 0.7);
+   --linkHoverColor: rgba(207, 73, 10, 0.6);
    --main-font: "Poppins", sans-serif;
+   --side-bar-width: 400px;
 }
 
 * {
    margin: 0;
    padding: 0;
    background: var(--backgroundColorDark);
+   box-sizing: border-box;
 }
 
 html {
-   box-sizing: border-box;
    color: var(--textColor);
    font-family: var(--main-font);
 }
@@ -41,7 +42,7 @@ header>h1 {
    width: 27rem;
    max-width: 60vw;
    margin: 10px auto;
-   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+   font-family: var(--main-font);
    background: rgba(255, 166, 0, 0.781);
    border-radius: 1rem;
    text-shadow: -3px -3px rgba(66, 59, 29, 0.459);
@@ -60,14 +61,13 @@ header>h1 {
 /* ------- Main Section ------- */
 
 
-.section {
+.nav-chapters {
    margin: auto;
    padding: 0 2rem;
-   min-width: 65vw;
-   max-width: 90vw;
+   width: 60vw;
 }
 
-.section hr {
+.nav-chapters hr {
    border: 0;
    /* border-radius: 50%;
    border-top: 3px solid rgba(255, 166, 0, 0.397); */
@@ -81,13 +81,14 @@ header>h1 {
 /* ------- Course Section ------- */
 
 
-.section-title {
+.chapter {
    background: inherit;
    padding: 4rem 0;
 }
 
-.section-title h1 {
+.chapter h1 {
    padding-bottom: 1rem;
+   font-size: 2rem;
 }
 
 .section-list {
@@ -122,14 +123,179 @@ header>h1 {
 
 /* ------- Page Section ------- */
 
-.page-container {
-   background-color: red;
-   min-height: 100vh;
+
+.page {
+   /* width: 100vw; */
+   display: grid;
+   grid-template-columns: 1fr var(--side-bar-width);
+   position: relative;
+}
+
+.content {
+   /* background: orange; */
+   min-height: 200vh;
+}
+
+/* ------- Side Bar Navigation ------- */
+
+
+.side-bar {
+   padding: 5rem 3rem;
+   position: fixed;
+   top: 0;
+   right: 0;
+   /* background: darkcyan; */
+   height: 100vh;
+   width: var(--side-bar-width);
+   overflow-y: scroll;
+   font-size: 14px;
+}
+
+/* ------- Hide Scrollbar for Side-bar (Chrome) ------- */
+.side-bar::-webkit-scrollbar {
+   width: 0 !important
+}
+
+.side-bar::before,
+.side-bar::after {
+   content: '';
+   left: 0.5rem;
+   width: 2px;
+   background-image: linear-gradient(to bottom, rgba(255, 166, 0, 0.027), rgba(255, 166, 0, 0.61), rgba(255, 166, 0, 0.027));
+   border-radius: 50%;
+   position: absolute;
+}
+
+.side-bar::before {
+   height: 4rem;
+   top: 0;
+}
+
+.side-bar::after {
+   height: calc(100vh - 8rem);
+   top: 8rem;
+}
+
+/* ------- Side Bar Button Open ------- */
+
+#side-bar-button-show {
+   height: 3rem;
+   width: 1.2rem;
+   background: red;
+   position: absolute;
+   top: 4.5rem;
+   right: 0;
+   z-index: 1;
+   display: none;
+}
+
+#side-bar-button-show>p {
+   writing-mode: vertical-lr;
+   text-orientation: mixed;
+   background-color: inherit;
+}
+
+#side-bar-button-show:hover {
+   cursor: pointer;
+}
+
+/* ------- Side Bar Button Close ------- */
+
+#side-bar-button-hide {
+   height: 3rem;
+   width: 1.2rem;
+   background: red;
+   position: absolute;
+   top: 4.5rem;
+   left: 0;
+}
+
+#side-bar-button-hide>p {
+   writing-mode: vertical-lr;
+   text-orientation: mixed;
+   background-color: inherit;
+}
+
+#side-bar-button-hide:hover {
+   cursor: pointer;
 }
 
 
 
+/* ------- Side Bar Header ------- */
+
+.side-bar h1 {
+   font-size: 1.6em;
+   padding-bottom: 2rem;
+}
+
+/* ------- Side Bar Links ------- */
+
+.side-bar-link-header {
+   color: var(--main-font);
+   text-decoration: none;
+   font-size: 1.2em;
+   display: block;
+}
+
+.side-bar-list {
+   padding-left: 1.4em;
+   list-style: none;
+}
+
+.side-bar-list-element {
+   position: relative;
+}
+
+.side-bar-link {
+   color: var(--linkColor);
+   text-decoration: none;
+   font-size: 1em;
+   list-style-type: none;
+}
+
+.side-bar-link:hover {
+   color: var(--linkHoverColor);
+}
+
+
+.side-bar-link::before,
+.side-bar-link::after {
+   content: '';
+   position: absolute;
+   height: 0.55em;
+   width: 0.1em;
+   background-color: red;
+}
+
+.side-bar-link::before {
+   transform: rotate(-45deg);
+   top: 0.3em;
+   left: -0.6em;
+}
+
+.side-bar-link::after {
+   transform: rotate(-135deg);
+   bottom: 0.3em;
+   left: -0.6em;
+}
+
+
+
+
+
 /* ------- Media Queries ------- */
+
+
+
+/* ------- 1370px ------- */
+
+
+@media only screen and (max-width: 1370px) {
+   :root {
+      --side-bar-width: 340px;
+   }
+}
 
 
 /* ------- 760px ------- */
@@ -139,7 +305,7 @@ header>h1 {
       font-size: 2.3rem;
    }
 
-   .section-title {
+   .chapter {
       font-size: 14px;
    }
 }
@@ -152,7 +318,7 @@ header>h1 {
       font-size: 1.8rem;
    }
 
-   .section-title {
+   .chapter {
       font-size: 12px;
    }
 }
