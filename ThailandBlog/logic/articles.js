@@ -167,17 +167,35 @@ read_more_buttons.forEach((button, id) => {
 
     // article_description.innerHTML = `<p class="article-description-full">${articles[id].description}</p>`;
 
+    read_more_buttons.forEach((butt, number) => {
+      if (id !== number) {
+        butt.classList.remove('disapeared');
+        butt.classList.add('show');
+        const current_article_img = butt.parentElement.querySelector('.article-img');
 
-    moreTextLoad(article_description, articles[id].description);
+        const current_article_description = butt.parentElement.parentElement.querySelector('.article-content').querySelector('.article-description');
+        current_article_description.parentElement.classList.remove('slide-down');
+        current_article_description.parentElement.classList.add('slide-up');
 
-    const article_height = button.parentElement.parentElement.querySelector('.article-content').querySelector('.article-description').clientHeight;
+        current_article_img.style.transition = `transform 1s`;
+        current_article_img.style.transform = `translateY(calc(0px))`;
+        shortTextLoad(current_article_description, articles[number].description);
+      } else {
+        butt.classList.remove('show');
+        moreTextLoad(article_description, articles[id].description);
+        const article_height = button.parentElement.parentElement.querySelector('.article-content').querySelector('.article-description-full').clientHeight;
+        article_img.style.transition = `transform 1s`;
+        article_img.style.transform = `translateY(calc(${(article_height) / 2}px))`;
+        console.log(article_height / 2);
+        console.log(article_description.clientHeight);
 
-    article_img.style.transition = `transform 1s`;
-    article_img.style.transform = `translateY(calc(${(article_height + 50) / 4}px)`;
-    console.log(article_height / 2);
-    console.log(article_description.clientHeight);
+        article_description.parentElement.classList.remove('slide-up');
+        article_description.parentElement.classList.add('slide-down');
+      }
+    })
 
-    article_description.parentElement.classList.add('slide-down');
+
+
   })
 });
 
@@ -231,6 +249,30 @@ function moreTextLoad(article_description, full_text) {
   loadText();
 }
 
+function shortTextLoad(article_description, full_text) {
+  const splitText = async () => {
+    for (let i = full_text.length; i > max_short_description_size; i--) {
+      let text = full_text.substring(0, i + 1);
+
+      if (text.length !== full_text.length) {
+        text += '...';
+      }
+
+      const signsToAppend = 20;
+
+      if (i % signsToAppend === 0) {
+        article_description.innerHTML = `<p class="article-description-full"></p>`;
+        article_description.firstChild.innerHTML = text;
+        // await sleep(10);
+        // console.log(i, i%100);
+      } else if (i === text.length - 1) {
+        article_description.firstChild.innerHTML = text;
+      }
+      // console.log(text);
+    }
+  }
+  splitText();
+}
 
 const sleep = (miliseconds) => {
   return new Promise(resolve => setTimeout(resolve, miliseconds))
