@@ -179,10 +179,17 @@ read_more_buttons.forEach((button, id) => {
 
         current_article_img.style.transition = `transform 1s`;
         current_article_img.style.transform = `translateY(calc(0px))`;
-        shortTextLoad(current_article_description, articles[number].description);
+        if (current_article_description.firstChild.firstChild != undefined) {
+          console.log(current_article_description.firstChild.firstChild.length, articles[number].description.length);
+          if (current_article_description.firstChild.firstChild.length === articles[number].description.length) {
+            shortTextLoad(current_article_description, articles[number].description);
+          }
+        }
+
       } else {
         butt.classList.remove('show');
         moreTextLoad(article_description, articles[id].description);
+        longText = true;
         const article_height = button.parentElement.parentElement.querySelector('.article-content').querySelector('.article-description-full').clientHeight;
         article_img.style.transition = `transform 1s`;
         article_img.style.transform = `translateY(calc(${(article_height) / 2}px))`;
@@ -263,7 +270,7 @@ function shortTextLoad(article_description, full_text) {
       if (i % signsToAppend === 0) {
         article_description.innerHTML = `<p class="article-description-full"></p>`;
         article_description.firstChild.innerHTML = text;
-        // await sleep(10);
+        await sleep(10);
         // console.log(i, i%100);
       } else if (i === text.length - 1) {
         article_description.firstChild.innerHTML = text;
