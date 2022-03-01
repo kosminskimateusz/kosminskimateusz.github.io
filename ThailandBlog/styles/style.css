@@ -117,7 +117,8 @@
 
 .article-description-full {
   padding-bottom: var(--article-footer-hight);
-
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .article-footer {
