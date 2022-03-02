@@ -1,0 +1,106 @@
+.articles {
+  width: 80vw;
+  max-width: 1250px;
+  min-height: 15vw;
+  margin: auto;
+  padding: 4.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+
+  .short-article {
+    display: flex;
+    gap: 5.5rem;
+
+    .article-img {
+      /* margin: auto; */
+      width: $article-img-width;
+      height: $article-img-height;
+      position: relative;
+
+      .read-more-button {
+        cursor: pointer;
+        position: absolute;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        border: none;
+        padding: 0.7rem 3rem;
+        border-radius: 0.8rem;
+        font-size: $read-more-button-font-size;
+        font-weight: 400;
+        transition: background 0.8s;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.699);
+        }
+      }
+
+      .disapeared {
+        transition: all 1s;
+        transform: scale(0%);
+      }
+
+      .show {
+        transition: all 1s;
+        transform: scale(100%);
+      }
+    }
+
+    .article-content {
+      position: relative;
+      /* background-color: #4e7d973a; */
+      padding: 0.3rem;
+      border-radius: 5px;
+      /* padding-left: 5.5rem; */
+
+      .article-header {
+        font-size: $article-header-font-size;
+        font-weight: 400;
+        height: 4rem;
+        padding-bottom: 1rem;
+      }
+
+      .article-description {
+        font-size: $article-description-font-size;
+        font-weight: 400;
+        /* padding-bottom: var(--article-footer-hight); */
+        /* background-color: red; */
+
+        .article-description-full {
+          padding-bottom: $article-footer-height;
+          font-size: $article-description-font-size;
+          font-weight: 400;
+        }
+      }
+
+      .article-footer {
+        /* background-color: #399FD6; */
+        position: absolute;
+        padding-top: 2rem;
+        bottom: 0.4rem;
+        height: $article-footer-height;
+        width: 80%;
+
+        .info {
+          display: flex;
+          gap: 3rem;
+          font-size: $article-description-info-font-size;
+          font-weight: 300;
+        }
+
+        .tags {
+          display: flex;
+          gap: 3rem;
+          font-size: $article-description-tags-font-size;
+          font-weight: 400;
+          padding-top: 1rem;
+
+          & p {
+            color: #399fd6;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
