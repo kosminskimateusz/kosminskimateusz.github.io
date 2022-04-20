@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@200;300;500&family=Roboto:wght@300;500&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -32,7 +33,11 @@ body {
 
 #side-bar {
   width: 18rem;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: 0;
+  -ms-overflow-style: none;
   background-color: #3a3a3a;
   font-size: 1.4rem;
   font-family: "Indie Flower", cursive;
@@ -44,6 +49,7 @@ body {
   padding-top: 4rem;
   top: 0;
   left: 0;
+  transition: transform 0.5s ease-in-out;
 }
 #side-bar #home-page {
   color: #d1d0ca;
@@ -79,6 +85,7 @@ body {
   transition: all 0.3s;
 }
 #side-bar .side-bar-list {
+  height: fit-content;
   text-decoration: none;
   list-style: none;
   width: fit-content;
@@ -109,18 +116,59 @@ body {
   left: 0.8rem;
 }
 
+#side-bar::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: calc(18rem - 2px);
+  width: 4px;
+  height: 100vh;
+  background-color: #505050;
+  border-radius: 50%;
+}
+
+#side-bar::-webkit-scrollbar {
+  width: 0;
+}
+
 #side-bar.hide {
-  display: none;
+  transform: translateX(-18rem);
 }
 
 #side-bar.show {
   display: block;
 }
 
+#content {
+  padding: 4rem 2.5rem;
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  justify-content: center;
+}
+#content h1 {
+  color: #d1d0ca;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  width: fit-content;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#content h1 span {
+  text-align: center;
+  padding-bottom: 1rem;
+  font-weight: 500;
+  width: fit-content;
+  display: block;
+}
+
 .hamburger {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
+  position: fixed;
+  top: 0.8rem;
+  left: 0.7rem;
   padding: 5px;
   display: flex;
   justify-content: center;
@@ -146,7 +194,7 @@ body {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  transition: background-color 0.1s 0.3s ease-in-out;
+  transition: background-color 0.1s 0.4s ease-in-out;
 }
 
 .hamburger-inner::before,
@@ -157,7 +205,7 @@ body {
   position: absolute;
   content: "";
   left: 0;
-  transition: transform 0.3s 0.2s ease-in-out;
+  transition: transform 0.3s 0.3s ease-in-out;
 }
 
 .hamburger-inner::before {
