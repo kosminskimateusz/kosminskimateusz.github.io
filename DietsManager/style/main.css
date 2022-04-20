@@ -152,6 +152,7 @@ body {
   color: #d1d0ca;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+  -webkit-text-size-adjust: none;
   font-size: 1.5rem;
   width: fit-content;
   text-align: center;
@@ -161,6 +162,7 @@ body {
 }
 #content h1 span {
   text-align: center;
+  -webkit-text-size-adjust: none;
   padding-bottom: 1rem;
   font-weight: 500;
   width: fit-content;
