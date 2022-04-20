@@ -33,8 +33,7 @@ body {
 
 #side-bar {
   width: 18rem;
-  min-height: 100vh;
-  max-height: 100vh;
+  min-height: -webkit-fill-available;
   overflow-y: auto;
   scrollbar-width: 0;
   -ms-overflow-style: none;
