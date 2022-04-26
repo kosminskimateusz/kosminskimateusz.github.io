@@ -103,7 +103,7 @@ if (window.location.href === `${clientUrl}/products.html`) {
 
         })
         .catch(error => console.log(error));
-} else if(window.location.href.includes("search__input")) {
+} else if (window.location.href.includes("search__input")) {
 }
 
 const search = () => {
@@ -113,8 +113,7 @@ const search = () => {
         .then(response => response.json())
         .then(data => {
             for (const el of data.data) {
-                if(el.name.includes(searchInputValue))
-                {
+                if (el.name.includes(searchInputValue)) {
                     console.log(el.id);
                     const tableRow = document.createElement("tr");
                     // Add ID to table
@@ -129,7 +128,7 @@ const search = () => {
                     const kcalTableData = document.createElement("td");
                     kcalTableData.innerHTML = el.kcal;
                     tableRow.appendChild(kcalTableData);
-    
+
                     productsTBody.appendChild(tableRow);
 
                 }
