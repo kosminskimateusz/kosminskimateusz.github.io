@@ -1,21 +1,53 @@
-// const THEME_BUTTON = document.querySelector("#theme-button");
-// const BODY = document.querySelector("body");
+// AFTER LOAD PAGE ABLE TO TRANSITION
 
-// THEME_BUTTON.addEventListener('click', () => {
-//     if (BODY.classList.contains("dark")) {
-//         BODY.classList.remove("dark");
-//         BODY.classList.add("light");
-//     } else {
-//         BODY.classList.remove("light");
-//         BODY.classList.add("dark");
-//     }
-// })
+window.addEventListener("load", () => {
+    document.body.classList.remove("preload");
+})
 
-
-import { print } from './page.js'
+import { print } from './page_loader.js'
 let products;
 
 print();
+
+
+const HAMBURGER = document.querySelector('.hamburger');
+const SIDE_BAR = document.querySelector('#side-bar');
+
+const toggleSideBar = () => {
+    HAMBURGER.classList.toggle('hamburger--active');
+    SIDE_BAR.classList.toggle('hide');
+}
+
+HAMBURGER.addEventListener('click', toggleSideBar);
+
+
+// Drop-down Diets menu
+
+const DIETS_BUTTON = document.querySelector("a.diets");
+console.log(DIETS_BUTTON);
+const DIETS_LIST = document.querySelector(".inner-list.diets");
+console.log(DIETS_LIST);
+
+const transformUp = "max-height .6s ease-in-out, opacity .2s ease-in-out, padding .4s ease-in-out";
+const transformDown = "max-height .6s ease-in-out, opacity .2s .4s ease-in-out, padding .4s ease-in-out";
+
+const toggleList = () => {
+    if (!DIETS_LIST.classList.contains("toggle")) {
+        DIETS_LIST.classList.add("toggle");
+        DIETS_LIST.style.transition = transformUp;
+    } else {
+        DIETS_LIST.classList.remove("toggle");
+        DIETS_LIST.style.transition = transformDown;
+    }
+}
+DIETS_BUTTON.addEventListener('click', toggleList);
+
+
+
+
+
+
+
 // await fetch('http://localhost:5000/products/')
 //     .then(res => res.json())
 //     .then(data => products = data)
@@ -35,16 +67,80 @@ print();
 //     }
 // }
 
-// products = getProducts();
 
-// console.log(products);
+// FILL PRODUCTS TABLE WITH DATA
 
-const HAMBURGER = document.querySelector('.hamburger');
-const SIDE_BAR = document.querySelector('#side-bar');
+const productsTable = document.querySelector("#products");
+const productsTBody = document.createElement("tbody");
+productsTBody.classList.add("products__body");
 
-const toggleSideBar = () => {
-    HAMBURGER.classList.toggle('hamburger--active');
-    SIDE_BAR.classList.toggle('hide');
+console.log(window.location.href);
+console.log(window.location.hash);
+const clientUrl = 'http://127.0.0.1:5501/client';
+if (window.location.href === `${clientUrl}/products.html`) {
+    fetch(`${clientUrl}/sampleData/products.json`)
+        .then(response => response.json())
+        .then(data => {
+            for (const el of data.data) {
+                console.log(el.id);
+                const tableRow = document.createElement("tr");
+                // Add ID to table
+                const idTableData = document.createElement("td");
+                idTableData.innerHTML = el.id;
+                tableRow.appendChild(idTableData);
+                // Add Name to table
+                const nameTableData = document.createElement("td");
+                nameTableData.innerHTML = el.name;
+                tableRow.appendChild(nameTableData);
+                // Add Kcal to table
+                const kcalTableData = document.createElement("td");
+                kcalTableData.innerHTML = el.kcal;
+                tableRow.appendChild(kcalTableData);
+
+                productsTBody.appendChild(tableRow);
+            }
+            productsTable.appendChild(productsTBody);
+
+        })
+        .catch(error => console.log(error));
+} else if(window.location.href.includes("search__input")) {
 }
 
-HAMBURGER.addEventListener('click', toggleSideBar);
+const search = () => {
+    const searchInputValue = document.querySelector("#search__input").value;
+    console.log(searchInputValue);
+    fetch(`${clientUrl}/sampleData/products.json`)
+        .then(response => response.json())
+        .then(data => {
+            for (const el of data.data) {
+                if(el.name.includes(searchInputValue))
+                {
+                    console.log(el.id);
+                    const tableRow = document.createElement("tr");
+                    // Add ID to table
+                    const idTableData = document.createElement("td");
+                    idTableData.innerHTML = el.id;
+                    tableRow.appendChild(idTableData);
+                    // Add Name to table
+                    const nameTableData = document.createElement("td");
+                    nameTableData.innerHTML = el.name;
+                    tableRow.appendChild(nameTableData);
+                    // Add Kcal to table
+                    const kcalTableData = document.createElement("td");
+                    kcalTableData.innerHTML = el.kcal;
+                    tableRow.appendChild(kcalTableData);
+    
+                    productsTBody.appendChild(tableRow);
+
+                }
+            }
+            productsTable.appendChild(productsTBody);
+
+        })
+        .catch(error => console.log(error));
+
+}
+
+const searchButton = document.querySelector("#search__button");
+
+searchButton.addEventListener("click", search);

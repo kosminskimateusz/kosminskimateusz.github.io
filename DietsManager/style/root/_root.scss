@@ -8,7 +8,11 @@
 body {
     position: relative;
     // min-height: 100vh;
-    display: flex;
+    // display: flex;
+}
+
+.preload * {
+    transition: none !important;
 }
 
 .hide {
