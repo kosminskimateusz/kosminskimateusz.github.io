@@ -42,7 +42,6 @@
 .products__table {
     width: 100%;
     background-color: cadetblue;
-
     .products__header {
         text-align: center;
         background-color: rgb(136, 95, 160);
@@ -50,9 +49,7 @@
 
     .products__body {
         background-color: rebeccapurple;
-
-        tr,
-        td {
+        tr, td {
             text-align: center;
 
         }
