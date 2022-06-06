@@ -4,11 +4,48 @@ window.addEventListener("load", () => {
     document.body.classList.remove("preload");
 })
 
-
 import { print } from './page_loader.js'
 
+
+// SIDEBAR MENU SHOW/HIDE
+
 const HAMBURGER = document.querySelector('.hamburger');
+const HAMBURGER_INNER = document.querySelector('.hamburger-inner');
 const SIDE_BAR = document.querySelector('#side-bar');
+
+let open;
+let isOpen;
+if (localStorage.getItem("sideBar")) {
+    open = localStorage.getItem("sideBar");
+    isOpen = open === "true";
+} else {
+    open = false;
+    localStorage.setItem("sideBar", open.toString());
+}
+
+
+// !!! FIX IT !!!
+
+
+
+
+if (isOpen) {
+    // HAMBURGER_INNER.classList.remove('hamburger-inner');
+    HAMBURGER_INNER.classList.remove('hamburger-inner');
+    HAMBURGER_INNER.classList.add('hamburger-inner-static');
+    HAMBURGER.classList.add('hamburger--active');
+    // HAMBURGER_INNER.classList.add('static');
+    SIDE_BAR.classList.remove('hide');
+} else {
+    HAMBURGER.classList.remove('hamburger--active');
+    // HAMBURGER_INNER.remove('static');
+    SIDE_BAR.classList.add('hide');
+}
+
+
+
+//
+
 
 function hideSidebarOutsideClick(evt) {
     if (!document.querySelector('nav').contains(evt.target)
@@ -20,9 +57,17 @@ function hideSidebarOutsideClick(evt) {
 }
 
 const toggleSideBar = () => {
+    HAMBURGER_INNER.classList.remove('hamburger-inner-static');
+    HAMBURGER_INNER.classList.add('hamburger-inner');
     HAMBURGER.classList.toggle('hamburger--active');
     SIDE_BAR.classList.toggle('hide');
-
+    if (SIDE_BAR.classList.contains('hide')) {
+        open = false;
+        localStorage.setItem("sideBar", open.toString());
+    } else {
+        open = true;
+        localStorage.setItem("sideBar", open.toString());
+    }
     if (HAMBURGER.classList.contains('hamburger--active')) {
         window.addEventListener('click', hideSidebarOutsideClick);
         window.addEventListener('touchstart', hideSidebarOutsideClick);
@@ -36,75 +81,28 @@ const toggleSideBar = () => {
 HAMBURGER.addEventListener('click', toggleSideBar);
 
 
-
-
-const config = { attributes: true };
-
-
-
-
-// MUTATION OBSERVER FOR HAMBURGER--ACTIVE
-
-// const callback = function (mutationList, observer) {
-//     for (const mutation of mutationList) {
-//         if (mutation.type === 'attributes') {
-//             if (HAMBURGER.classList.contains('hamburger--active')) {
-
-//                 console.log("changed");
-//             }
-//         }
-//     }
-// }
-
-// const observer = new MutationObserver(callback);
-// observer.observe(HAMBURGER, config);
-
-
-// Drop-down Diets menu
+// DROP-DOWN DIETS MENU WITH TRANSITION
 
 const DIETS_BUTTON = document.querySelector("a.diets");
 console.log(DIETS_BUTTON);
 const DIETS_LIST = document.querySelector(".inner-list.diets");
 console.log(DIETS_LIST);
 
-const transformUp = "max-height .6s ease-in-out, opacity .2s ease-in-out, padding .4s ease-in-out";
-const transformDown = "max-height .6s ease-in-out, opacity .2s .4s ease-in-out, padding .4s ease-in-out";
+const transformUp = "visibility .2s ease-in-out, max-height .6s ease-in-out, opacity .1s ease-in-out, padding .4s ease-in-out";
+const transformDown = "visibility .6s ease-in-out, max-height .6s ease-in-out, opacity .2s .4s ease-in-out, padding .4s ease-in-out";
+
 
 const toggleList = () => {
     if (!DIETS_LIST.classList.contains("toggle")) {
         DIETS_LIST.classList.add("toggle");
         DIETS_LIST.style.transition = transformUp;
+
     } else {
         DIETS_LIST.classList.remove("toggle");
         DIETS_LIST.style.transition = transformDown;
     }
 }
 DIETS_BUTTON.addEventListener('click', toggleList);
-
-
-
-
-
-
-
-// await fetch('http://localhost:5000/products/')
-//     .then(res => res.json())
-//     .then(data => products = data)
-//     .then(() => console.log(products));
-
-
-// async function getProducts() {
-//     try {
-//         let exam;
-//         const response = await (await fetch('https://www.boredapi.com/api/activity')
-//             .then(res => res.json())
-//             .then(data => exam = data));
-
-//         return exam;
-//     } catch (error) {
-//         console.error(error.message);
-//     }
-// }
 
 
 // FILL PRODUCTS TABLE WITH DATA
@@ -138,14 +136,14 @@ const renderFromDB = async function () {
                     const kcalTableData = document.createElement("td");
                     kcalTableData.innerHTML = el.kcal;
                     tableRow.appendChild(kcalTableData);
-
+                    // Add row to Table Body
                     productsTBody.appendChild(tableRow);
                 }
             }
             productsTable.appendChild(productsTBody);
-
         })
 }
+
 
 // RENDER DATA FROM SAMPLE DATA
 
@@ -171,7 +169,7 @@ const render = async function () {
                     const kcalTableData = document.createElement("td");
                     kcalTableData.innerHTML = el.kcal;
                     tableRow.appendChild(kcalTableData);
-
+                    // Add row to Table Body
                     productsTBody.appendChild(tableRow);
                 }
             }
@@ -181,11 +179,14 @@ const render = async function () {
     return false;
 }
 
-render();
+
 
 // DYNAMIC SEARCH
 const searchInput = document.querySelector("#search__input");
 
-searchInput.addEventListener("input", () => {
+if (searchInput) {
     render();
-})
+    searchInput.addEventListener("input", () => {
+        render();
+    })
+}

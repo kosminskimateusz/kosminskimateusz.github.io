@@ -10,6 +10,8 @@
 
 body {
   position: relative;
+  background-color: #343434;
+  min-height: 100vh;
 }
 
 .preload * {
@@ -52,7 +54,7 @@ body {
   top: 0;
   left: 0;
   z-index: 100;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 #side-bar #home-page {
   color: #d1d0ca;
@@ -91,20 +93,27 @@ body {
   height: fit-content;
   text-decoration: none;
   list-style: none;
+  min-width: 162px;
   width: fit-content;
   margin: 2rem 0 1rem 2.3rem;
 }
 #side-bar .side-bar-list a {
+  cursor: pointer;
   color: #d1d0ca;
 }
-#side-bar .side-bar-list .side-bar-list-element {
+#side-bar .side-bar-list a:hover, #side-bar .side-bar-list span:hover {
+  color: #000;
+  text-shadow: 1px 1px rgba(107, 106, 106, 0.521);
+  transition: all 0.5s;
+}
+#side-bar .side-bar-list .side-bar-list-element, #side-bar .side-bar-list .diets {
   padding: 0.2rem 0;
 }
 #side-bar .side-bar-list .logout {
   margin-top: 2rem;
 }
 #side-bar .side-bar-list .inner-list {
-  max-height: 10rem;
+  max-height: 9rem;
   list-style: none;
   padding: 0.2rem 0;
 }
@@ -123,6 +132,7 @@ body {
   left: 0.8rem;
 }
 #side-bar .side-bar-list .toggle {
+  visibility: hidden;
   opacity: 0;
   max-height: 0 !important;
   padding: 0;
@@ -145,6 +155,7 @@ body {
 
 #side-bar.hide {
   transform: translateX(-18rem);
+  visibility: hidden;
 }
 
 #side-bar.show {
@@ -190,6 +201,7 @@ body {
 
 .products__table {
   width: 100%;
+  max-width: 50rem;
   background-color: cadetblue;
 }
 .products__table .products__header {
@@ -260,10 +272,48 @@ body {
 }
 
 .hamburger--active .hamburger-inner::before {
+  content: "";
   transform: translateY(7px) rotate(45deg);
 }
 
 .hamburger--active .hamburger-inner::after {
+  content: "";
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.hamburger-inner-static {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  transition: none;
+}
+
+.hamburger-inner-static::before,
+.hamburger-inner-static::after {
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+  background-color: rgb(187, 185, 183);
+  content: "";
+  left: 0;
+  transition: none;
+}
+
+.hamburger-inner-static::before {
+  top: -7px;
+  content: "";
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-inner-static::after {
+  top: 7px;
+  content: "";
   transform: translateY(-7px) rotate(-45deg);
 }
 
